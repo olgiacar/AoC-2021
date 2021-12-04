@@ -20,4 +20,3 @@ class DayOne : SolutionInterface(fileName = "dayOne/input-01") {
 }
 
 fun main() = DayOne().run()
-

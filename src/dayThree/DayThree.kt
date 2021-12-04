@@ -4,7 +4,7 @@ import SolutionInterface
 import kotlin.math.pow
 
 
-class DayThree : SolutionInterface(fileName = "dayThree/input-03") {
+class DayThree : SolutionInterface(packageName = "dayThree", testSolutionOne = "198", testSolutionTwo = "230") {
     override fun exerciseOne(input: List<String>): String {
         var gamma = ""
         (0 until input[0].length).forEach { i -> input.mostCommonBit(i).also { gamma = "$gamma$it" } }

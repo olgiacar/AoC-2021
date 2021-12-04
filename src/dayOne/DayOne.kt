@@ -2,7 +2,7 @@ package dayOne
 
 import SolutionInterface
 
-class DayOne : SolutionInterface(fileName = "dayOne/input-01") {
+class DayOne : SolutionInterface(packageName = "dayOne", testSolutionOne = "7", testSolutionTwo = "5") {
 
     override fun exerciseOne(input: List<String>): String {
         return input.map { it.toInt() }

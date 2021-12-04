@@ -2,7 +2,7 @@ package dayFour
 
 import SolutionInterface
 
-class DayFour : SolutionInterface(fileName = "dayFour/input-04") {
+class DayFour : SolutionInterface(packageName = "dayFour", testSolutionOne = "4512", testSolutionTwo = "1924") {
     override fun exerciseOne(input: List<String>): String {
         val numbers = input.first().split(",").map { it.toInt() }
         val boards = getBoards(input.subList(2, input.size))

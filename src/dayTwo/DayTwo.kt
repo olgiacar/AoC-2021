@@ -2,7 +2,7 @@ package dayTwo
 
 import SolutionInterface
 
-class DayTwo : SolutionInterface(fileName = "dayTwo/input-02") {
+class DayTwo : SolutionInterface(packageName = "dayTwo", testSolutionOne = "150", testSolutionTwo = "900") {
     override fun exerciseOne(input: List<String>): String {
         val (horizontalDistance, depth) = mapToPairs(input).reduce { a, b ->
             Pair(

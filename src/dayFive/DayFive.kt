@@ -1,24 +1,25 @@
 package dayFive
 
 import SolutionInterface
+import daySeven.DaySeven
 import java.lang.Integer.max
 import kotlin.math.absoluteValue
 
-class DayFive : SolutionInterface(packageName = "dayFive", testSolutionOne = "5", testSolutionTwo = "12") {
+class DayFive : SolutionInterface(packageName = "dayFive", testSolutionOne = 5, testSolutionTwo = 12) {
 
-    override fun exerciseOne(input: List<String>): String {
+    override fun exerciseOne(input: List<String>): Int {
         val lines = convertInput(input)
             .filter { it.first.first == it.second.first || it.first.second == it.second.second }
         val lineCountArray = getLineCountArray(lines)
         setLineCountArray(lines, lineCountArray)
-        return countValuesLargerThanOne(lineCountArray).toString()
+        return countValuesLargerThanOne(lineCountArray)
     }
 
-    override fun exerciseTwo(input: List<String>): String {
+    override fun exerciseTwo(input: List<String>): Int {
         val lines = convertInput(input)
         val lineCount = getLineCountArray(lines)
         setLineCountArray(lines, lineCount)
-        return countValuesLargerThanOne(lineCount).toString()
+        return countValuesLargerThanOne(lineCount)
     }
 
     private fun countValuesLargerThanOne(array: Array<Array<Int>>): Int {
@@ -52,4 +53,4 @@ class DayFive : SolutionInterface(packageName = "dayFive", testSolutionOne = "5"
     }
 }
 
-fun main() = DayFive().run()
+private fun main() = DayFive().run()

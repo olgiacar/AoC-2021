@@ -4,17 +4,17 @@ import SolutionInterface
 import kotlin.math.pow
 
 
-class DayThree : SolutionInterface(packageName = "dayThree", testSolutionOne = "198", testSolutionTwo = "230") {
-    override fun exerciseOne(input: List<String>): String {
+class DayThree : SolutionInterface(packageName = "dayThree", testSolutionOne = 198, testSolutionTwo = 230) {
+    override fun exerciseOne(input: List<String>): Int {
         var gamma = ""
         (0 until input[0].length).forEach { i -> input.mostCommonBit(i).also { gamma = "$gamma$it" } }
 
         val epsilon = invert(gamma)
         val solutionOne = toDecimal(gamma) * toDecimal(epsilon)
-        return solutionOne.toString()
+        return solutionOne
     }
 
-    override fun exerciseTwo(input: List<String>): String {
+    override fun exerciseTwo(input: List<String>): Int {
         var max = input.toList()
         var min = input.toList()
         (0 until input[0].length).forEach { index ->
@@ -27,7 +27,7 @@ class DayThree : SolutionInterface(packageName = "dayThree", testSolutionOne = "
                 min = min.filter { it[index] == leastCommon }
             }
         }
-        return (toDecimal(max.first()) * toDecimal(min.first())).toString()
+        return (toDecimal(max.first()) * toDecimal(min.first()))
     }
 
     private fun invert(gamma: String) = String(gamma.map { if (it == '1') '0' else '1' }.toCharArray())
@@ -53,4 +53,4 @@ class DayThree : SolutionInterface(packageName = "dayThree", testSolutionOne = "
     }
 }
 
-fun main() = DayThree().run()
+private fun main() = DayThree().run()

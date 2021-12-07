@@ -2,18 +2,18 @@ package dayTwo
 
 import SolutionInterface
 
-class DayTwo : SolutionInterface(packageName = "dayTwo", testSolutionOne = "150", testSolutionTwo = "900") {
-    override fun exerciseOne(input: List<String>): String {
+class DayTwo : SolutionInterface(packageName = "dayTwo", testSolutionOne = 150, testSolutionTwo = 900) {
+    override fun exerciseOne(input: List<String>): Int {
         val (horizontalDistance, depth) = mapToPairs(input).reduce { a, b ->
             Pair(
                 a.first + b.first,
                 a.second + b.second
             )
         }
-        return ((horizontalDistance * depth).toString())
+        return ((horizontalDistance * depth))
     }
 
-    override fun exerciseTwo(input: List<String>): String {
+    override fun exerciseTwo(input: List<String>): Int {
         var solution = Triple(0, 0, 0)
         mapToPairs(input).forEach {
             solution = Triple(
@@ -22,7 +22,7 @@ class DayTwo : SolutionInterface(packageName = "dayTwo", testSolutionOne = "150"
                 solution.third + it.second
             )
         }
-        return ((solution.first * solution.second).toString())
+        return ((solution.first * solution.second))
     }
 
     private fun mapToPairs(input: List<String>): List<Pair<Int, Int>> {
@@ -41,4 +41,4 @@ class DayTwo : SolutionInterface(packageName = "dayTwo", testSolutionOne = "150"
 
 }
 
-fun main() = DayTwo().run()
+private fun main() = DayTwo().run()

@@ -1,9 +1,10 @@
 package dayFour
 
 import SolutionInterface
+import daySeven.DaySeven
 
-class DayFour : SolutionInterface(packageName = "dayFour", testSolutionOne = "4512", testSolutionTwo = "1924") {
-    override fun exerciseOne(input: List<String>): String {
+class DayFour : SolutionInterface(packageName = "dayFour", testSolutionOne = 4512, testSolutionTwo = 1924) {
+    override fun exerciseOne(input: List<String>): Int {
         val numbers = input.first().split(",").map { it.toInt() }
         val boards = getBoards(input.subList(2, input.size))
         val iterator = numbers.iterator()
@@ -14,10 +15,10 @@ class DayFour : SolutionInterface(packageName = "dayFour", testSolutionOne = "45
         } while (iterator.hasNext() && checkWinner(boards.map { it.second }) == null)
         val winner = boards.indices.first { isWinner(boards[it].second) }
         val score = getScore(boards[winner].first, boards[winner].second, next)
-        return score.toString()
+        return score
     }
 
-    override fun exerciseTwo(input: List<String>): String {
+    override fun exerciseTwo(input: List<String>): Int {
         val numbers = input.first().split(",").map { it.toInt() }
         var boards = getBoards(input.subList(2, input.size))
         val iterator = numbers.iterator()
@@ -29,7 +30,7 @@ class DayFour : SolutionInterface(packageName = "dayFour", testSolutionOne = "45
         } while (iterator.hasNext() && checkWinner(boards.map { it.second }) == null)
         val lastWinner = boards.first()
         val score = getScore(lastWinner.first, lastWinner.second, next)
-        return score.toString()
+        return score
     }
 
     private fun getScore(intBoard: List<List<Int>>, booleanBoard: List<MutableList<Boolean>>, lastNumber: Int): Int {
@@ -91,4 +92,4 @@ class DayFour : SolutionInterface(packageName = "dayFour", testSolutionOne = "45
     }
 }
 
-fun main() = DayFour().run()
+private fun main() = DayFour().run()

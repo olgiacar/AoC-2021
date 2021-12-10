@@ -11,10 +11,10 @@ class DayNine : SolutionInterface(packageName = "dayNine", testSolutionOne = 15,
     override fun exerciseTwo(input: List<String>): Int {
         val inputGrid = toArray(input)
         val lowPoints = getLowPoints(inputGrid)
-        val basinSizes = mutableListOf<Int>()
+        val basinSizes = mutableListOf<Long>()
         val visited = inputGrid.map { it.map { false }.toMutableList() }
         lowPoints.forEach { it.forEach { point -> basinSizes.add(getBasinSize(point, inputGrid, visited)) } }
-        return basinSizes.sortedByDescending { it }.subList(0, 3).reduce { acc, i -> i * acc }
+        return basinSizes.sortedByDescending { it }.subList(0, 3).reduce { acc, i -> i * acc }.toInt()
     }
 
     private fun toArray(input: List<String>): List<List<Int>> = input.map { line -> line.map { it.toString().toInt() } }
@@ -35,33 +35,30 @@ class DayNine : SolutionInterface(packageName = "dayNine", testSolutionOne = 15,
         return lowPoints
     }
 
-    private fun getBasinSize(start: Pair<Int, Int>, grid: List<List<Int>>, visited: List<MutableList<Boolean>>): Int {
-        val count = mutableSetOf<Pair<Int, Int>>()
-        getBasinSize(start.first, start.second, grid, count, visited)
-        val fields = count.sortedBy { it.first }
-        return fields.size
+    private fun getBasinSize(start: Pair<Int, Int>, grid: List<List<Int>>, visited: List<MutableList<Boolean>>): Long {
+        return getBasinSize(start.first, start.second, grid, visited)
     }
 
     private fun getBasinSize(
         row: Int,
         column: Int,
         grid: List<List<Int>>,
-        basinSize: MutableSet<Pair<Int, Int>>,
         visited: List<MutableList<Boolean>>,
-    ) {
-        if (visited[row][column]) return
+    ): Long {
+        if (visited[row][column]) return 0L
         visited[row][column] = true
-        if (grid[row][column] == 9) return
-        basinSize.add(Pair(row, column))
+        if (grid[row][column] == 9) return 0L
+        var size = 1L
 
-        if (row > 0 && grid[row - 1][column] - 1 == grid[row][column])
-            getBasinSize(row - 1, column, grid, basinSize, visited)
-        if (column > 0 && grid[row][column - 1] - 1 == grid[row][column])
-            getBasinSize(row, column - 1, grid, basinSize, visited)
-        if (row < grid.size - 1 && grid[row + 1][column] - 1 == grid[row][column])
-            getBasinSize(row + 1, column, grid, basinSize, visited)
-        if (column < grid.first().size - 1 && grid[row][column + 1] - 1 == grid[row][column])
-            getBasinSize(row, column + 1, grid, basinSize, visited)
+        if (row > 0 && grid[row - 1][column] - 1 >= grid[row][column])
+            size += getBasinSize(row - 1, column, grid, visited)
+        if (column > 0 && grid[row][column - 1] - 1 >= grid[row][column])
+            size += getBasinSize(row, column - 1, grid, visited)
+        if (row < grid.size - 1 && grid[row + 1][column] - 1 >= grid[row][column])
+            size += getBasinSize(row + 1, column, grid, visited)
+        if (column < grid.first().size - 1 && grid[row][column + 1] - 1 >= grid[row][column])
+            size += getBasinSize(row, column + 1, grid, visited)
+        return size
     }
 }
 
